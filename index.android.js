@@ -9,18 +9,46 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
+  Button,
   View
 } from 'react-native';
 import Login from './components/Login'
+import mainSrv from './service/mainSrv'
+import axios from 'axios';
+
 
 export default class applogintest extends Component {
+handleGetClick(){
+  axios.get('http://192.168.0.77:3000/api/tests')
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
+
+handlePostClick(){
+  axios.post('http://192.168.0.77:3000/api/tests', {
+    name: "Fred"
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Welcome to React Native!!!
         </Text>
         <Login />
+        <Button onPress={this.handleGetClick} title="TestGet" />
+        <Button onPress={this.handlePostClick} title="TestPost" />
+
         <Text style={styles.instructions}>
           To get started, edit index.android.js
         </Text>

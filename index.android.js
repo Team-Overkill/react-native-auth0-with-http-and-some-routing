@@ -11,6 +11,7 @@ import {
   Text,
   View
 } from 'react-native';
+import Login from './components/Login'
 
 export default class applogintest extends Component {
   render() {
@@ -19,6 +20,7 @@ export default class applogintest extends Component {
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
+        <Login />
         <Text style={styles.instructions}>
           To get started, edit index.android.js
         </Text>

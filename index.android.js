@@ -15,36 +15,49 @@ import {
 import Login from './components/Login'
 import mainSrv from './service/mainSrv'
 import axios from 'axios';
+import { StackNavigator } from 'react-navigation';
 
 
-export default class applogintest extends Component {
-handleGetClick(){
-  axios.get('http://192.168.0.77:3000/api/tests')
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
-}
+export default class HomeScreen extends Component {
+  static navigationOptions = {
+      title: 'Banana',
+  };
+  
+  handleGetClick(){
+    axios.get('http://192.168.0.77:3000/api/tests')
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }
 
-handlePostClick(){
-  axios.post('http://192.168.0.77:3000/api/tests', {
-    name: "Fred"
-  })
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
-}
+  handlePostClick(){
+    axios.post('http://192.168.0.77:3000/api/tests', {
+      name: "Fred"
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }
+
+
+
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!!!
+          Welcome to React Native!!! what?
         </Text>
+        <Button
+          onPress={() => navigate('Chat')}
+          title="Chat with Lucy"
+        />
         <Login />
         <Button onPress={this.handleGetClick} title="TestGet" />
         <Button onPress={this.handlePostClick} title="TestPost" />
@@ -60,6 +73,25 @@ handlePostClick(){
     );
   }
 }
+
+class ChatScreen extends Component {
+  static navigationOptions = {
+    title: 'Chat with Lucy',
+  };
+  render() {
+    return (
+      <View>
+        <Text>Chat with Lucy</Text>
+      </View>
+    );
+  }
+}
+
+const applogintest = StackNavigator({
+  Home: { screen: HomeScreen },
+  Chat: { screen: ChatScreen },
+});
+
 
 const styles = StyleSheet.create({
   container: {
